@@ -1,5 +1,30 @@
 import 'package:flutter/material.dart';
 
+Widget _buildBoxWithTextAndIcon(String text, IconData iconData, double width, double height) {
+  return Container(
+    width: width,
+    height: height,
+    decoration: BoxDecoration(
+      color: Colors.black,
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          iconData,
+          color: Colors.white,
+        ),
+        SizedBox(height: 5),
+        Text(
+          text,
+          style: TextStyle(color: Colors.white),
+        ),
+      ],
+    ),
+  );
+}
+
 class Homepage extends StatelessWidget {
   const Homepage({super.key});
 
@@ -7,6 +32,9 @@ class Homepage extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+
+    final small_box_width = screenWidth * 0.10;
+    final small_box_height = screenHeight * 0.06;
 
     return Scaffold(
       appBar: AppBar(
@@ -26,46 +54,11 @@ class Homepage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
-                width: screenWidth * 0.10,
-                height: screenHeight * 0.06,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(20), // Adding border radius
-                ),
-              ),
-              Container(
-                width: screenWidth * 0.10,
-                height: screenHeight * 0.06,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(20), // Adding border radius
-                ),
-              ),
-              Container(
-                width: screenWidth * 0.10,
-                height: screenHeight * 0.06,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(20), // Adding border radius
-                ),
-              ),
-              Container(
-                width: screenWidth * 0.10,
-                height: screenHeight * 0.06,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(20), // Adding border radius
-                ),
-              ),
-              Container(
-                width: screenWidth * 0.10,
-                height: screenHeight * 0.06,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(20), // Adding border radius
-                ),
-              ),
+              _buildBoxWithTextAndIcon('All', Icons.holiday_village, small_box_width, small_box_height),
+              _buildBoxWithTextAndIcon('Classic', Icons.cabin, small_box_width, small_box_height),
+              _buildBoxWithTextAndIcon('Podcasts', Icons.podcasts, small_box_width, small_box_height),
+              _buildBoxWithTextAndIcon('Trending', Icons.fire_extinguisher, small_box_width, small_box_height),
+              _buildBoxWithTextAndIcon('Hip Hop', Icons.power_input, small_box_width, small_box_height),
             ],
           ),
           SizedBox(
