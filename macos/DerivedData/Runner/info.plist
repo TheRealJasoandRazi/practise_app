@@ -2,7 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>com.apple.security.get-task-allow</key>
-	<true/>
+	<key>LastAccessedDate</key>
+	<date>2024-04-19T01:28:19Z</date>
+	<key>WorkspacePath</key>
+	<string>/Users/nemanjapopovic/practise_app/macos/Runner.xcworkspace</string>
 </dict>
 </plist>

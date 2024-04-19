@@ -6,7 +6,7 @@ Widget _buildBoxWithTextAndIcon(String text, IconData iconData, double width, do
     height: height,
     decoration: BoxDecoration(
       color: Colors.black,
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(15),
     ),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -25,6 +25,35 @@ Widget _buildBoxWithTextAndIcon(String text, IconData iconData, double width, do
   );
 }
 
+Widget _showPlainText(double padding, String text, double fontsize) {
+  return SizedBox(
+    width: double.infinity,
+    child: Container(
+      padding: EdgeInsets.all(padding), // Adding left padding
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: fontsize,
+          color: Colors.white
+        ),
+        textAlign: TextAlign.start,
+      ),
+    ),
+  );
+}
+
+Widget _longBottomRectangles(double borderRadius, double width, Color color, BuildContext context){
+  return Expanded(
+    child: Container(
+      width: MediaQuery.of(context).size.width * width, // 90% of screen width
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(borderRadius),
+      ),
+    ),
+  );
+}
+
 class Homepage extends StatelessWidget {
   const Homepage({super.key});
 
@@ -33,8 +62,8 @@ class Homepage extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
-    final small_box_width = screenWidth * 0.10;
-    final small_box_height = screenHeight * 0.06;
+    final small_box_width = screenWidth * 0.15;
+    final small_box_height = screenHeight * 0.08;
 
     return Scaffold(
       appBar: AppBar(
@@ -61,20 +90,7 @@ class Homepage extends StatelessWidget {
               _buildBoxWithTextAndIcon('Hip Hop', Icons.power_input, small_box_width, small_box_height),
             ],
           ),
-          SizedBox(
-            width: double.infinity,
-            child: Container(
-              padding: const EdgeInsets.all(16.0), // Adding left padding
-              child: Text(
-                "Editor's Choice",
-                style: TextStyle(
-                  fontSize: 30,
-                  color: Colors.white
-                ),
-                textAlign: TextAlign.start,
-              ),
-            ),
-          ),
+          _showPlainText(16.0, "Editor's Choice", 30),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -83,7 +99,26 @@ class Homepage extends StatelessWidget {
                 height: screenHeight * 0.25,
                 decoration: BoxDecoration(
                   color: Colors.black,
-                  borderRadius: BorderRadius.circular(20), // Adding border radius
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      DecoratedBox(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: NetworkImage(
+                              'https://upload.wikimedia.org/wikipedia/commons/e/e7/Everest_North_Face_toward_Base_Camp_Tibet_Luca_Galuzzi_2006.jpg',
+                            ),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
+                      // Add other widgets (text, icons, etc.) here if needed
+                    ],
+                  ),
                 ),
               ),
               Container(
@@ -96,46 +131,22 @@ class Homepage extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
-            width: double.infinity,
-            child: Container(
-              padding: const EdgeInsets.all(16.0), // Adding left padding
-              child: Text(
-                "Popular",
-                style: TextStyle(
-                  fontSize: 30,
-                  color: Colors.white
-                ),
-                textAlign: TextAlign.start,
-              ),
+          _showPlainText(16.0, "Popular", 30),
+          Expanded( //bottom three rectangles
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center, // Center containers in the column
+              children: [
+                _longBottomRectangles(30, 0.9, const Color.fromARGB(255, 163, 67, 67), context),
+                SizedBox(height: 10), // Add space between containers
+                _longBottomRectangles(30, 0.9, const Color.fromARGB(255, 48, 82, 110), context),
+                SizedBox(height: 10), // Add space between containers
+                _longBottomRectangles(30, 0.9, const Color.fromARGB(255, 16, 42, 63), context),
+              ],
             ),
           ),
-          Container(
-              width: MediaQuery.of(context).size.width * 0.9, // 80% of screen width
-              height: screenHeight * 0.15, // Adjust the height as needed
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 163, 67, 67),
-                borderRadius: BorderRadius.circular(30)
-              ),
-            ),
-            SizedBox(height: 10), // Add space between rectangles
-            Container(
-              width: MediaQuery.of(context).size.width * 0.9, // 80% of screen width
-              height: screenHeight * 0.15, // Adjust the height as needed
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 48, 82, 110),
-                borderRadius: BorderRadius.circular(30)
-              ),
-            ),
-            SizedBox(height: 10), // Add space between rectangles
-            Container(
-              width: MediaQuery.of(context).size.width * 0.9, // 80% of screen width
-              height: screenHeight * 0.15, // Adjust the height as needed
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 16, 42, 63),
-                borderRadius: BorderRadius.circular(30)
-              ),
-            ),
+          Padding(
+            padding: EdgeInsets.only(bottom: 15),
+          ),
         ],
       ),
     );
