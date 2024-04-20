@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'secondpage.dart';
 
 Widget _buildBoxWithTextAndIcon(String text, IconData iconData, double width, double height) {
   return Container(
@@ -127,7 +128,7 @@ Color darkenColor(Color color, double factor) {
   return Color.fromARGB(color.alpha, red, green, blue);
 }
 
-Widget _editorsChoiceBlocks(double width, double height, String imageUrl, String title, String author){
+Widget _editorsChoiceBlocks(double width, double height, String imageUrl, String title, String author, BuildContext context){
   return Container(
     width: width,
     height: height,
@@ -192,10 +193,19 @@ Widget _editorsChoiceBlocks(double width, double height, String imageUrl, String
                   // Right-aligned icon
                   Padding(
                     padding: EdgeInsets.all(10),
-                    child: Icon(
-                      Icons.play_arrow, // You can change the icon to your preferred one
-                      color: Colors.white,
-                      size: 24, // Adjust the icon size as needed
+                    child: IconButton(
+                      icon: Icon(
+                          Icons.play_arrow,
+                          color: Colors.white,
+                          size: 24,
+                      ),
+                      onPressed: () {
+                        print('Icon clicked!');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SecondPage()),
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -273,10 +283,10 @@ class Homepage extends StatelessWidget {
               children: [
                 _editorsChoiceBlocks(screenWidth * 0.4, screenHeight * 0.25, 
                   "https://upload.wikimedia.org/wikipedia/commons/e/e7/Everest_North_Face_toward_Base_Camp_Tibet_Luca_Galuzzi_2006.jpg",
-                  "Stupid Love", "Lady Gaga"),
+                  "Stupid Love", "Lady Gaga", context),
                 _editorsChoiceBlocks(screenWidth * 0.4, screenHeight * 0.25, 
                 "https://assets-global.website-files.com/655e0fa544c67c1ee5ce01c7/655e0fa544c67c1ee5ce0f7c_how-to-start-a-band-and-get-booked-header-p-800.jpeg",
-                "Dark Horse", "Katy Perry"),
+                "Dark Horse", "Katy Perry", context),
               ],
             ),
             _showPlainText(16.0, "Popular", 30),
