@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Widget _buildBoxWithTextAndIcon(String text, IconData iconData, double width, double height) {
@@ -47,7 +48,15 @@ Widget _longBottomRectangles(double borderRadius, double width, Color color, Bui
     child: Container(
       width: MediaQuery.of(context).size.width * width, // 90% of screen width
       decoration: BoxDecoration(
-        color: color,
+        //color: color,
+        gradient: LinearGradient(
+          colors: [
+              darkenColor(color, 0.3), // Darker pink
+              darkenColor(color, 0.9), // Lighter pink
+          ],
+          begin: Alignment.topLeft, // Start point of the gradient
+          end: Alignment.bottomRight, // End point of the gradient
+        ),
         borderRadius: BorderRadius.circular(borderRadius),
       ),
       child: Row(
@@ -62,7 +71,7 @@ Widget _longBottomRectangles(double borderRadius, double width, Color color, Bui
                   topLeft: Radius.circular(borderRadius), // Set the top-left corner radius
                   bottomLeft: Radius.circular(borderRadius), // Set the bottom-left corner radius
                 ),
-                color: darkenColor(color, 0.7), // You can specify a different color or shade
+                color: darkenColor(color, 0.5), // You can specify a different color or shade
               ),
               child: Icon(
                 Icons.play_arrow, // You can change the icon to your preferred one
@@ -182,7 +191,7 @@ Widget _editorsChoiceBlocks(double width, double height, String imageUrl, String
                   ),
                   // Right-aligned icon
                   Padding(
-                    padding: EdgeInsets.all(5),
+                    padding: EdgeInsets.all(10),
                     child: Icon(
                       Icons.play_arrow, // You can change the icon to your preferred one
                       color: Colors.white,
@@ -223,47 +232,71 @@ class Homepage extends StatelessWidget {
             ),
         )
       ),
-      body: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _buildBoxWithTextAndIcon('All', Icons.holiday_village, small_box_width, small_box_height),
-              _buildBoxWithTextAndIcon('Classic', Icons.cabin, small_box_width, small_box_height),
-              _buildBoxWithTextAndIcon('Podcasts', Icons.podcasts, small_box_width, small_box_height),
-              _buildBoxWithTextAndIcon('Trending', Icons.fire_extinguisher, small_box_width, small_box_height),
-              _buildBoxWithTextAndIcon('Hip Hop', Icons.power_input, small_box_width, small_box_height),
-            ],
-          ),
-          _showPlainText(16.0, "Editor's Choice", 30),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _editorsChoiceBlocks(screenWidth * 0.4, screenHeight * 0.25, 
-                "https://upload.wikimedia.org/wikipedia/commons/e/e7/Everest_North_Face_toward_Base_Camp_Tibet_Luca_Galuzzi_2006.jpg",
-                 "Stupid Love", "Lady Gaga"),
-              _editorsChoiceBlocks(screenWidth * 0.4, screenHeight * 0.25, 
-              "https://assets-global.website-files.com/655e0fa544c67c1ee5ce01c7/655e0fa544c67c1ee5ce0f7c_how-to-start-a-band-and-get-booked-header-p-800.jpeg",
-              "Dark Horse", "Katy Perry"),
-            ],
-          ),
-          _showPlainText(16.0, "Popular", 30),
-          Expanded( //bottom three rectangles
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center, // Center containers in the column
+      body: Container(
+        child: Column(
+          children: [
+            SizedBox(
+              height: screenHeight * 0.10, // Set the desired height
+              width: double.infinity, // Set the width to match the container width
+              child: ListView.separated(
+                padding: const EdgeInsets.all(8), // Add padding
+                itemCount: 8, // Total number of boxes
+                scrollDirection: Axis.horizontal, // Enable horizontal scrolling
+                itemBuilder: (context, index) {
+                    // Return the box widget for the given index
+                    List<Map<String, dynamic>> data = [
+                        {'text': 'All', 'icon': Icons.holiday_village},
+                        {'text': 'Classic', 'icon': Icons.cabin},
+                        {'text': 'Podcasts', 'icon': Icons.podcasts},
+                        {'text': 'Trending', 'icon': Icons.fire_extinguisher},
+                        {'text': 'Hip Hop', 'icon': Icons.power_input},
+                        {'text': "90's Pop", 'icon': Icons.music_note},
+                        {'text': "Jazz", 'icon': Icons.piano},
+                        {'text': "UK Drill", 'icon': Icons.bathroom}
+                    ];
+                    return _buildBoxWithTextAndIcon(
+                        data[index]['text'],
+                        data[index]['icon'],
+                        small_box_width,
+                        small_box_height,
+                    );
+                },
+                separatorBuilder: (context, index) {
+                    // Return a SizedBox to create spacing between boxes
+                    return SizedBox(width: 12);
+                },
+              ),
+            ),
+            _showPlainText(16.0, "Editor's Choice", 30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _longBottomRectangles(30, 0.9, const Color.fromARGB(255, 163, 67, 67), context, "Boom, Boom, Boom", "Vengaboys"),
-                SizedBox(height: 10), // Add space between containers
-                _longBottomRectangles(30, 0.9, const Color.fromARGB(255, 48, 82, 110), context, "Djadja", "Aya Nikamura"),
-                SizedBox(height: 10), // Add space between containers
-                _longBottomRectangles(30, 0.9, const Color.fromARGB(255, 16, 42, 63), context, "Du Hast", "Rammstein"),
+                _editorsChoiceBlocks(screenWidth * 0.4, screenHeight * 0.25, 
+                  "https://upload.wikimedia.org/wikipedia/commons/e/e7/Everest_North_Face_toward_Base_Camp_Tibet_Luca_Galuzzi_2006.jpg",
+                  "Stupid Love", "Lady Gaga"),
+                _editorsChoiceBlocks(screenWidth * 0.4, screenHeight * 0.25, 
+                "https://assets-global.website-files.com/655e0fa544c67c1ee5ce01c7/655e0fa544c67c1ee5ce0f7c_how-to-start-a-band-and-get-booked-header-p-800.jpeg",
+                "Dark Horse", "Katy Perry"),
               ],
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(bottom: 15),
-          ),
-        ],
+            _showPlainText(16.0, "Popular", 30),
+            Expanded( //bottom three rectangles
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center, // Center containers in the column
+                children: [
+                  _longBottomRectangles(30, 0.9, const Color.fromARGB(255, 163, 67, 67), context, "Boom, Boom, Boom", "Vengaboys"),
+                  SizedBox(height: 10), // Add space between containers
+                  _longBottomRectangles(30, 0.9, const Color.fromARGB(255, 48, 82, 110), context, "Djadja", "Aya Nikamura"),
+                  SizedBox(height: 10), // Add space between containers
+                  _longBottomRectangles(30, 0.9, const Color.fromARGB(255, 16, 42, 63), context, "Du Hast", "Rammstein"),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 15),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -43,21 +43,21 @@
           "BUILD_DIR" : "/Users/nemanjapopovic/practise_app/build/ios",
           "COMPILER_INDEX_STORE_ENABLE" : "NO",
           "FLUTTER_SUPPRESS_ANALYTICS" : "true",
-          "SCRIPT_OUTPUT_STREAM_FILE" : "/var/folders/2_/sy527zl135b037m3dnqfs4y40000gn/T/flutter_tools.fg675f/flutter_ios_build_temp_dirds5A1Z/pipe_to_stdout",
+          "SCRIPT_OUTPUT_STREAM_FILE" : "/var/folders/2_/sy527zl135b037m3dnqfs4y40000gn/T/flutter_tools.YRsKYw/flutter_ios_build_temp_dir200YOL/pipe_to_stdout",
           "SDKROOT" : "iphonesimulator17.4"
         }
       },
       "synthesized" : {
         "table" : {
           "ACTION" : "build",
-          "ASSETCATALOG_FILTER_FOR_DEVICE_MODEL" : "iPhone16,2",
+          "ASSETCATALOG_FILTER_FOR_DEVICE_MODEL" : "iPad14,1",
           "ASSETCATALOG_FILTER_FOR_DEVICE_OS_VERSION" : "17.4",
-          "ASSETCATALOG_FILTER_FOR_THINNING_DEVICE_CONFIGURATION" : "iPhone16,2",
+          "ASSETCATALOG_FILTER_FOR_THINNING_DEVICE_CONFIGURATION" : "iPad14,1",
           "BUILD_ACTIVE_RESOURCES_ONLY" : "YES",
           "ENABLE_PREVIEWS" : "NO",
           "ENABLE_XOJIT_PREVIEWS" : "NO",
-          "TARGET_DEVICE_IDENTIFIER" : "13E74590-19E6-4FF5-BD84-EED53AB9DE53",
-          "TARGET_DEVICE_MODEL" : "iPhone16,2",
+          "TARGET_DEVICE_IDENTIFIER" : "715684B0-4CCB-4C75-B1AF-B83E08BE0F48",
+          "TARGET_DEVICE_MODEL" : "iPad14,1",
           "TARGET_DEVICE_OS_VERSION" : "17.4",
           "TARGET_DEVICE_PLATFORM_NAME" : "iphonesimulator"
         }
